@@ -313,7 +313,7 @@ class CapitalT(object):
           :rtype: CapitalT
         """
         # ---------------------------------------------------------------------
-        # TODO: 7.
+        # DONE: 7.
         #   READ the above specification, including the Example.
         #   Implement this method, then TEST it by:
         #     a. Un-comment the call to its test function, in main.  Run.
@@ -325,13 +325,28 @@ class CapitalT(object):
         # IMPORTANT RESTRICTION: You are NOT permitted to add any instance
         # variables beyond  h_rect  and  v_rect, at any point of this exercise.
         #######################################################################
-
-        self.h_rect = rg.Rectangle(self.h_rect.corner_1.clone(),self.h_rect.corner_2.clone())
-        self.h_rect.fill_color = self.h_rect.fill_color
-        self.h_rect.outline_color = self.h_rect.outline_color
-        self.v_rect = rg.Rectangle(self.v_rect.corner_1.clone(),self.v_rect.corner_2.clone())
-        self.v_rect.fill_color = self.v_rect.fill_color
-        self.v_rect.outline_color = self.v_rect.outline_color
+        # x1 = intersection_center.x - width*0.5
+        # y1 = intersection_center.y +letter_thickness*0.5
+        # h_rect = horizontal v_rect = vertcle
+        # x2 = intersection_center.x +  width*0.5
+        # y2 = intersection_center.y - letter_thickness*0.5
+        #
+        # x3= intersection_center.x - 0.5*letter_thickness
+        # y3= intersection_center.y -0.5*letter_thickness
+        #
+        # x4 = x3 + letter_thickness
+        # y4 = y3 + height
+        # self.h_rect = rg.Rectangle(rg.Point(x1,y1),rg.Point(x2,y2))
+        # self.v_rect = rg.Rectangle(rg.Point(x3,y3),rg.Point(x4,y4))
+        height = -(self.v_rect.corner_1.y-self.v_rect.corner_2.y)
+        width = self.h_rect.corner_2.x-self.h_rect.corner_1.x
+        letter_thickness = -(-self.h_rect.corner_1.y+self.h_rect.corner_2.y)
+        x = self.v_rect.corner_1.x+ 0.5*width
+        y = self.v_rect.corner_1.y - 0.5*letter_thickness
+        intersection_center = rg.Point(x,y)
+        t2 = CapitalT(intersection_center, width, height, letter_thickness)
+        t2.set_colors(self.h_rect.fill_color,self.h_rect.outline_color)
+        return t2
 # -----------------------------------------------------------------------------
 # Calls  main  to start the ball rolling.
 # -----------------------------------------------------------------------------
