@@ -123,12 +123,12 @@ class Baby(object):
            self.hours += 1
            self.fed += 1
 
-       elif self.hours == 2 or self.fed == 2:
+       elif self.hours == 1 or self.fed == 1:
            print('Baby {} is awake. Time for food.'.format(self.name))
            self.hours += 1
            self.fed += 1
 
-       elif self.hours >=3 or self.fed >= 3:
+       elif self.hours >=2 or self.fed >= 2:
            print('Baby {} is CRYING uncontrollably! Feed the Baby!'.format(self.name))
            self.hours += 1
            self.fed += 1
@@ -136,10 +136,8 @@ class Baby(object):
     def feed_baby(self):
         self.hours += 1
         print('Thank you for feeding baby {}.'.format(self.name))
-        if self.fed == 0:
+        if self.fed >= 0:
             self.fed = 0
-        else:
-            self.fed +=1
 
 # -----------------------------------------------------------------------------
 # Calls  main  to start the ball rolling.
